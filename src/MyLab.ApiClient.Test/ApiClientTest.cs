@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit.Abstractions;
 
 namespace MyLab.ApiClient.Test
@@ -13,8 +16,10 @@ namespace MyLab.ApiClient.Test
         where TStartup : class
     {
         private readonly WebApplicationFactory<TStartup> _appFactory;
-        private readonly ApiClient<TService> _apiClient;
 
+        /// <summary>
+        /// Gets test output
+        /// </summary>
         protected ITestOutputHelper Output { get; }
 
         /// <summary>
@@ -24,30 +29,54 @@ namespace MyLab.ApiClient.Test
         {
             Output = output;
             _appFactory = new WebApplicationFactory<TStartup>();
-            _apiClient = new ApiClient<TService>(new DelegateHttpClientProvider(() => _appFactory.CreateClient())); 
         }
 
+        /// <inheritdoc />
         public void Dispose()
         {
             _appFactory?.Dispose();
         }
 
-        protected async Task<CallDetails<string>> TestCall(Expression<Func<TService, Task>> invoker)
+        /// <summary>
+        /// Performs server method calling
+        /// </summary>
+        protected async Task<CallDetails<string>> TestCall(Expression<Func<TService, Task>> invoker, 
+            Action<IServiceCollection> overrideServices = null,
+            Action<HttpClient> httpClientPostInit = null)
         {
-            var details = await _apiClient.Call(invoker).GetDetailed();
+            var client = CreateClient(overrideServices, httpClientPostInit);
+            
+            var details = await client.Call(invoker).GetDetailed();
 
             Log(details);
 
             return details;
         }
 
-        protected async Task<CallDetails<TRes>> TestCall<TRes>(Expression<Func<TService, Task<TRes>>> invoker)
+        /// <summary>
+        /// Performs server method calling
+        /// </summary>
+        protected async Task<CallDetails<TRes>> TestCall<TRes>(Expression<Func<TService, Task<TRes>>> invoker,
+            Action<IServiceCollection> overrideServices = null,
+            Action<HttpClient> httpClientPostInit = null)
         {
-            var details = await _apiClient.Call(invoker).GetDetailed();
+            var client = CreateClient(overrideServices, httpClientPostInit);
+
+            var details = await client.Call(invoker).GetDetailed();
 
             Log(details);
 
             return details;
+        }
+
+        protected virtual void OverrideServices(IServiceCollection services)
+        {
+
+        }
+
+        protected virtual void HttpClientPostInit(HttpClient httpClient)
+        {
+
         }
 
         void Log<TRes>(CallDetails<TRes> call)
@@ -64,6 +93,23 @@ namespace MyLab.ApiClient.Test
             Output.WriteLine("");
             Output.WriteLine(call.ResponseDump);
             Output.WriteLine("===== RESPONSE END =====");
+        }
+
+        private ApiClient<TService> CreateClient(Action<IServiceCollection> overrideServices, Action<HttpClient> httpClientPostInit)
+        {
+            var factory = _appFactory.WithWebHostBuilder(builder => builder.ConfigureServices(srv =>
+            {
+                OverrideServices(srv);
+                overrideServices?.Invoke(srv);
+            }));
+
+            var httpClient = factory.CreateClient();
+
+            HttpClientPostInit(httpClient);
+            httpClientPostInit?.Invoke(httpClient);
+
+            var client = new ApiClient<TService>(new SingleHttpClientProvider(httpClient));
+            return client;
         }
     }
 }

@@ -25,6 +25,7 @@ namespace TestServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSingleton(new StringProcessorService("foo"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

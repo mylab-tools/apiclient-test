@@ -32,7 +32,7 @@ namespace FuncTest
             //Act
             var val = await TestCall(
                 s => s.AddSalt("test"), 
-                srv => srv.AddSingleton(new StringProcessorService("bar"))
+                overrideServices: srv => srv.AddSingleton(new StringProcessorService("bar"))
                 );
 
             //Assert

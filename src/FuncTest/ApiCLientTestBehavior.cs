@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
 using MyLab.ApiClient;
 using MyLab.ApiClient.Test;
 using TestServer;
@@ -9,7 +10,7 @@ using Xunit.Abstractions;
 
 namespace FuncTest
 {
-    public class ApiClientTestBehaviorAfter : ApiClientTest<Startup, IWeatherForecastService>
+    public class ApiClientTestBehaviorAfter : ApiClientTest<Startup, ITestService>
     {
         public ApiClientTestBehaviorAfter(ITestOutputHelper output) : base(output)
         {
@@ -18,44 +19,37 @@ namespace FuncTest
         [Fact]
         public async Task ShouldInvokeServerCall()
         {
-            //Arrange
-            
-
             //Act
-            var weather = await TestCall(service => service.Get());
+            var val = await TestCall(service => service.AddSalt("test"));
 
             //Assert
-            Assert.NotNull(weather);
-        }
-    }
-
-    public class ApiClientTestBehaviorBefore : IClassFixture<WebApplicationFactory<Startup>>
-    {
-        private readonly WebApplicationFactory<Startup> _appFactory;
-        private readonly ITestOutputHelper _output;
-
-        public ApiClientTestBehaviorBefore(WebApplicationFactory<Startup> appFactory, ITestOutputHelper output)
-        {
-            _appFactory = appFactory;
-            _output = output;
+            Assert.Equal("test-foo", val.ResponseContent);
         }
 
         [Fact]
-        public async Task ShouldInvokeServerCall()
+        public async Task ShouldInvokeWithServiceConfiguration()
         {
-            //Arrange
-            var clProvider = new DelegateHttpClientProvider(() => _appFactory.CreateClient());
-            var client = new ApiClient<IWeatherForecastService>(clProvider);
-
             //Act
-            var detailedResponse = await client.Call(service => service.Get()).GetDetailed();
-
-            _output.WriteLine(detailedResponse.RequestDump);
-            _output.WriteLine("");
-            _output.WriteLine(detailedResponse.ResponseDump);
+            var val = await TestCall(
+                s => s.AddSalt("test"), 
+                srv => srv.AddSingleton(new StringProcessorService("bar"))
+                );
 
             //Assert
-            Assert.NotNull(detailedResponse.ResponseContent);
+            Assert.Equal("test-bar", val.ResponseContent);
+        }
+
+        [Fact]
+        public async Task ShouldInvokeWithHttpModifying()
+        {
+            //Act
+            var val = await TestCall(
+                s => s.AddSaltToHeader(), 
+                httpClientPostInit: client => client.DefaultRequestHeaders.Add("ArgumentHeader", "test")
+                );
+
+            //Assert
+            Assert.Equal("test-foo", val.ResponseContent);
         }
     }
 }

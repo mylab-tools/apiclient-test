@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit.Abstractions;
 
@@ -97,7 +98,7 @@ namespace MyLab.ApiClient.Test
 
         private ApiClient<TService> CreateClient(Action<IServiceCollection> overrideServices, Action<HttpClient> httpClientPostInit)
         {
-            var factory = _appFactory.WithWebHostBuilder(builder => builder.ConfigureServices(srv =>
+            var factory = _appFactory.WithWebHostBuilder(builder => builder.ConfigureTestServices(srv =>
             {
                 OverrideServices(srv);
                 overrideServices?.Invoke(srv);

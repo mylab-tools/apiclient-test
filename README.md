@@ -8,7 +8,7 @@
 
 ## Обзор
 
-`MyLab.ApiClient.Test` представляет набор инструментов для написания функциональных и интеграционных тестов на базе `xUnit`, связанных с вызовами `WEB-API` с использованием [MyAuth.ApiClient](https://github.com/ozzy-ext-mylab/apiclient).
+`MyLab.ApiClient.Test` представляет набор инструментов для написания функциональных и интеграционных тестов на базе `xUnit`, связанных с вызовами `WEB-API` с использованием [MyLab.ApiClient](https://github.com/ozzy-ext-mylab/apiclient).
 
 ## ApiClientTest - Базовый класс теста API-клиента
 

@@ -9,7 +9,8 @@
     <PackageProjectUrl>https://github.com/ozzy-ext-mylab/apiclient-test</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ozzy-ext-mylab/apiclient-test.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Version>1.1.1</Version>
+    <Version>1.2.1</Version>
+    <Description>Представляет набор инструментов для написания функциональных и интеграционных тестов на базе `xUnit`, связанных с вызовами `WEB-API` с использованием MyLab.ApiClient.</Description>
   </PropertyGroup>
 
   <ItemGroup>

@@ -10,7 +10,7 @@ using Xunit.Abstractions;
 
 namespace FuncTest
 {
-    public class ApiClientTestBehaviorAfter : ApiClientTest<Startup, ITestService>
+    public class ApiClientTestBehaviorAfter : ApiClientTest<Startup, ITestApi>
     {
         public ApiClientTestBehaviorAfter(ITestOutputHelper output) : base(output)
         {

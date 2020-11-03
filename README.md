@@ -10,7 +10,7 @@
 
 `MyLab.ApiClient.Test` представляет набор инструментов для написания функциональных и интеграционных тестов на базе `xUnit`, связанных с вызовами `WEB-API` с использованием [MyAuth.ApiClient](https://github.com/ozzy-ext-mylab/apiclient).
 
-## Базовый класс теста API-клиента
+## ApiClientTest - Базовый класс теста API-клиента
 
 ### Обзор 
 
@@ -102,7 +102,7 @@ public class ApiClientTestBehaviorAfter : ApiClientTest<Startup, IWeatherForecas
 Результат выполнения теста:
 
 ```
-===== REQUEST BEGIN =====
+===== REQUEST BEGIN (IWeatherForecastService) =====
 
 GET http://localhost/WeatherForecast/
 
@@ -110,7 +110,7 @@ Cookie: <empty>
 
 ===== REQUEST END =====
 
-===== RESPONSE BEGIN =====
+===== RESPONSE BEGIN (IWeatherForecastService) =====
 
 200 OK
 
@@ -263,4 +263,54 @@ protected virtual void HttpClientPostInit(HttpClient client)
 	client.DefaultRequestHeaders.Add("ArgumentHeader", "test")
 }
 ```
+
+## TestApi - объектная модель тестового API
+
+### Обзор
+
+`TestApi` позволяет использовать одно или несколько веб-приложений в тестах. 
+
+При использовании `TestApi` есть следующие рекомендации:
+
+*  создавать объекты `TestApi` в конструкторе класса теста;
+* создавать по одному объекту `TestApi` на каждый `API`;
+* при инициализации в конструкторе присваивать `ITestOutputHelper`;
+* при необходимости, во время инициализации в конструкторе, указывать общие для всех тестов класса переопределения сервисов и настройки `HttpClient` через определение полей  `ServiceOverrider` и `HttpClientTuner`;
+* в каждом тестовом методе запускать приложения `API` и получать по клиенту на действующие в этом тесте экземпляры `API` с помощью метода `Start` класса `TestApi`.
+
+### Инициализация
+
+```C#
+public TestApiBehavior(ITestOutputHelper output) 
+{
+    _api = new TestApi<Startup, ITestApi>
+    {
+        Output = output,
+        //ServiceOverrider = services => {},
+        //HttpClientTuner = client => {}
+    };
+}
+```
+
+### Использование
+
+```C#
+[Fact]
+public async Task ShouldInvokeServerCall()
+{
+    //Arrange 
+    var client = _api.Start(
+    	//serviceOverrider: services => {},
+	    //httpClientTuner: client => {}
+    );
+
+    //Act
+    var val = await client.Call(service => service.AddSalt("test"));
+
+    //Assert
+    Assert.Equal("test-foo", val.ResponseContent);
+}
+```
+
+
 

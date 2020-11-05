@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MyLab.ApiClient.Test</name>
+    </assembly>
+    <members>
+        <member name="T:MyLab.ApiClient.Test.ApiClientTest`2">
+            <summary>
+            Contains base functional for test with API client
+            </summary>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.ApiClientTest`2.Output">
+            <summary>
+            Gets test output
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.ApiClientTest`2.#ctor(Xunit.Abstractions.ITestOutputHelper)">
+            <summary>
+            Initializes a new instance of <see cref="T:MyLab.ApiClient.Test.ApiClientTest`2"/>
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.ApiClientTest`2.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:MyLab.ApiClient.Test.ApiClientTest`2.TestCall(System.Linq.Expressions.Expression{System.Func{`1,System.Threading.Tasks.Task}},System.Action{Microsoft.Extensions.DependencyInjection.IServiceCollection},System.Action{System.Net.Http.HttpClient})">
+            <summary>
+            Performs server method calling
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.ApiClientTest`2.TestCall``1(System.Linq.Expressions.Expression{System.Func{`1,System.Threading.Tasks.Task{``0}}},System.Action{Microsoft.Extensions.DependencyInjection.IServiceCollection},System.Action{System.Net.Http.HttpClient})">
+            <summary>
+            Performs server method calling
+            </summary>
+        </member>
+        <member name="T:MyLab.ApiClient.Test.TestApi`2">
+            <summary>
+            Represent test api application instance
+            </summary>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.TestApi`2.ServiceOverrider">
+            <summary>
+            Overrides services for
+            </summary>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.TestApi`2.HttpClientTuner">
+            <summary>
+            Additional tunes <see cref="T:System.Net.Http.HttpClient"/>
+            </summary>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.TestApi`2.Output">
+            <summary>
+            Test output for log writing
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.TestApi`2.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:MyLab.ApiClient.Test.TestApi`2"/>
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.TestApi`2.Start(System.Action{Microsoft.Extensions.DependencyInjection.IServiceCollection},System.Action{System.Net.Http.HttpClient})">
+            <summary>
+            Starts test API instance and returns <see cref="T:MyLab.ApiClient.ApiClient`1"/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MyLab.ApiClient.Test.TestApiClient`1">
+            <summary>
+            Provides wrapped test API calls 
+            </summary>
+            <typeparam name="TApiContact">API contract</typeparam>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.TestApiClient`1.Output">
+            <summary>
+            Test output for log writing
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.TestApiClient`1.#ctor(MyLab.ApiClient.ApiClient{`0})">
+            <summary>
+            Initializes a new instance of <see cref="T:MyLab.ApiClient.Test.TestApiClient`1"/>
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.TestApiClient`1.Call(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task}})">
+            <summary>
+            Performs server method calling
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.TestApiClient`1.Call``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}})">
+            <summary>
+            Performs server method calling
+            </summary>
+        </member>
+    </members>
+</doc>

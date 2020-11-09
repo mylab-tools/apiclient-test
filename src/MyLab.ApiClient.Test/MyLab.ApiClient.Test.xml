@@ -32,6 +32,16 @@
             Performs server method calling
             </summary>
         </member>
+        <member name="M:MyLab.ApiClient.Test.ApiClientTest`2.OverrideServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Override to specify common services for all tests in test class
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.ApiClientTest`2.HttpClientPostInit(System.Net.Http.HttpClient)">
+            <summary>
+            Override to tune <see cref="T:System.Net.Http.HttpClient"/> for all tests in test class
+            </summary>
+        </member>
         <member name="T:MyLab.ApiClient.Test.TestApi`2">
             <summary>
             Represent test api application instance
@@ -87,6 +97,27 @@
         <member name="M:MyLab.ApiClient.Test.TestApiClient`1.Call``1(System.Linq.Expressions.Expression{System.Func{`0,System.Threading.Tasks.Task{``0}}})">
             <summary>
             Performs server method calling
+            </summary>
+        </member>
+        <member name="T:MyLab.ApiClient.Test.TestCallDetails`1">
+            <summary>
+            Contains details about request and response
+            </summary>
+            <typeparam name="TRes">result object type</typeparam>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.TestCallDetails`1.ResponseProcessingError">
+            <summary>
+            Determines that there was processing result error
+            </summary>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.TestCallDetails`1.ProcessingError">
+            <summary>
+            Gets response processing exception
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.TestCallDetails`1.#ctor(MyLab.ApiClient.CallDetails{`0})">
+            <summary>
+            Initializes a new instance of <see cref="T:MyLab.ApiClient.Test.TestCallDetails`1"/>
             </summary>
         </member>
     </members>

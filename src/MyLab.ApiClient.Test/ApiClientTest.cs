@@ -45,7 +45,7 @@ namespace MyLab.ApiClient.Test
         /// <summary>
         /// Performs server method calling
         /// </summary>
-        protected Task<CallDetails<string>> TestCall(Expression<Func<TApiContact, Task>> invoker, 
+        protected Task<TestCallDetails<string>> TestCall(Expression<Func<TApiContact, Task>> invoker, 
             Action<IServiceCollection> overrideServices = null,
             Action<HttpClient> httpClientPostInit = null)
         {
@@ -57,7 +57,7 @@ namespace MyLab.ApiClient.Test
         /// <summary>
         /// Performs server method calling
         /// </summary>
-        protected Task<CallDetails<TRes>> TestCall<TRes>(Expression<Func<TApiContact, Task<TRes>>> invoker,
+        protected Task<TestCallDetails<TRes>> TestCall<TRes>(Expression<Func<TApiContact, Task<TRes>>> invoker,
             Action<IServiceCollection> overrideServices = null,
             Action<HttpClient> httpClientPostInit = null)
         {
@@ -66,11 +66,17 @@ namespace MyLab.ApiClient.Test
             return client.Call(invoker);
         }
 
+        /// <summary>
+        /// Override to specify common services for all tests in test class
+        /// </summary>
         protected virtual void OverrideServices(IServiceCollection services)
         {
 
         }
 
+        /// <summary>
+        /// Override to tune <see cref="HttpClient"/> for all tests in test class
+        /// </summary>
         protected virtual void HttpClientPostInit(HttpClient httpClient)
         {
 

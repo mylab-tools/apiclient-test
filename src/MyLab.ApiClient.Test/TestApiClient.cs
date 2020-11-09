@@ -30,28 +30,62 @@ namespace MyLab.ApiClient.Test
         /// <summary>
         /// Performs server method calling
         /// </summary>
-        public async Task<CallDetails<string>> Call(Expression<Func<TApiContact, Task>> invoker)
+        public async Task<TestCallDetails<string>> Call(Expression<Func<TApiContact, Task>> invoker)
         {
-            var details = await _apiClient.Call(invoker).GetDetailed();
+            CallDetails<string> details;
+            Exception respProcError = null;
 
-            Log(details);
+            try
+            {
+                details = await _apiClient.Call(invoker).GetDetailed();
+            }
+            catch (DetailedResponseProcessingException<string> e)
+            {
+                respProcError = e.InnerException;
+                details = e.CallDetails;
+            }
+            
+            var resDetails = new TestCallDetails<string>(details)
+            {
+                ResponseProcessingError = respProcError != null,
+                ProcessingError =  respProcError
+            };
 
-            return details;
+            Log(resDetails);
+
+            return resDetails;
         }
 
         /// <summary>
         /// Performs server method calling
         /// </summary>
-        public async Task<CallDetails<TRes>> Call<TRes>(Expression<Func<TApiContact, Task<TRes>>> invoker)
+        public async Task<TestCallDetails<TRes>> Call<TRes>(Expression<Func<TApiContact, Task<TRes>>> invoker)
         {
-            var details = await _apiClient.Call(invoker).GetDetailed();
+            CallDetails<TRes> details;
+            Exception respProcError = null;
 
-            Log(details);
+            try
+            {
+                details = await _apiClient.Call(invoker).GetDetailed();
+            }
+            catch (DetailedResponseProcessingException<TRes> e)
+            {
+                respProcError = e.InnerException;
+                details = e.CallDetails;
+            }
 
-            return details;
+            var resDetails = new TestCallDetails<TRes>(details)
+            {
+                ResponseProcessingError = respProcError != null,
+                ProcessingError = respProcError
+            };
+
+            Log(resDetails);
+
+            return resDetails;
         }
 
-        void Log<TRes>(CallDetails<TRes> call)
+        void Log<TRes>(TestCallDetails<TRes> call)
         {
             if (Output == null) return;
 
@@ -65,6 +99,14 @@ namespace MyLab.ApiClient.Test
             Output.WriteLine("");
             Output.WriteLine(call.ResponseDump);
             Output.WriteLine("===== RESPONSE END =====");
+
+            if (call.ResponseProcessingError)
+            {
+                Output.WriteLine($"===== RESPONSE PROC ERROR ({typeof(TApiContact).Name}) =====");
+                Output.WriteLine("");
+                Output.WriteLine(call.ProcessingError.ToString());
+                Output.WriteLine("===== RESPONSE PROC ERROR END =====");
+            }
         }
     }
 }

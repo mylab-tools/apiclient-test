@@ -73,6 +73,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:MyLab.ApiClient.Test.TestApi`2.Start(System.Net.Http.HttpClient@,System.Action{Microsoft.Extensions.DependencyInjection.IServiceCollection},System.Action{System.Net.Http.HttpClient})">
+            <summary>
+            Starts test API instance and returns <see cref="T:MyLab.ApiClient.ApiClient`1"/>
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:MyLab.ApiClient.Test.TestApiClient`1">
             <summary>
             Provides wrapped test API calls 

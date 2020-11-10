@@ -47,18 +47,29 @@ namespace MyLab.ApiClient.Test
             Action<IServiceCollection> serviceOverrider = null, 
             Action<HttpClient> httpClientTuner = null)
         {
+            return Start(out _, serviceOverrider, httpClientTuner);
+        }
+
+        /// <summary>
+        /// Starts test API instance and returns <see cref="ApiClient{TApiContract}"/>
+        /// </summary>
+        /// <returns></returns>
+        public TestApiClient<TApiContact> Start(out HttpClient innerHttpClient,
+            Action<IServiceCollection> serviceOverrider = null,
+            Action<HttpClient> httpClientTuner = null)
+        {
             var factory = _appFactory.WithWebHostBuilder(builder => builder.ConfigureTestServices(srv =>
             {
                 ServiceOverrider?.Invoke(srv);
                 serviceOverrider?.Invoke(srv);
             }));
 
-            var httpClient = factory.CreateClient();
+            innerHttpClient = factory.CreateClient();
 
-            HttpClientTuner?.Invoke(httpClient);
-            httpClientTuner?.Invoke(httpClient);
+            HttpClientTuner?.Invoke(innerHttpClient);
+            httpClientTuner?.Invoke(innerHttpClient);
 
-            var client = new ApiClient<TApiContact>(new SingleHttpClientProvider(httpClient));
+            var client = new ApiClient<TApiContact>(new SingleHttpClientProvider(innerHttpClient));
 
             return new TestApiClient<TApiContact>(client)
             {

@@ -312,5 +312,15 @@ public async Task ShouldInvokeServerCall()
 }
 ```
 
+У метода `Start` есть перегрузка для получения внутреннего `HttpClient`:
+
+```C#
+var client = _api.Start(
+		out var innerClient,
+    	//serviceOverrider: services => {},
+	    //httpClientTuner: client => {}
+    );
+```
+
 
 

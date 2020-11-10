@@ -102,6 +102,7 @@ namespace MyLab.ApiClient.Test
 
             if (call.ResponseProcessingError)
             {
+                Output.WriteLine("");
                 Output.WriteLine($"===== RESPONSE PROC ERROR ({typeof(TApiContact).Name}) =====");
                 Output.WriteLine("");
                 Output.WriteLine(call.ProcessingError.ToString());

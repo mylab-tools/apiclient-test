@@ -51,7 +51,7 @@ namespace MyLab.ApiClient.Test
                 ProcessingError =  respProcError
             };
 
-            Log(resDetails);
+            Output?.WriteLine(resDetails.ToTestDump<string, TApiContact>());
 
             return resDetails;
         }
@@ -80,34 +80,9 @@ namespace MyLab.ApiClient.Test
                 ProcessingError = respProcError
             };
 
-            Log(resDetails);
+            Output?.WriteLine(resDetails.ToTestDump<TRes, TApiContact>());
 
             return resDetails;
-        }
-
-        void Log<TRes>(TestCallDetails<TRes> call)
-        {
-            if (Output == null) return;
-
-            Output.WriteLine("");
-            Output.WriteLine($"===== REQUEST BEGIN ({typeof(TApiContact).Name}) =====");
-            Output.WriteLine("");
-            Output.WriteLine(call.RequestDump);
-            Output.WriteLine("===== REQUEST END =====");
-            Output.WriteLine("");
-            Output.WriteLine($"===== RESPONSE BEGIN ({typeof(TApiContact).Name}) =====");
-            Output.WriteLine("");
-            Output.WriteLine(call.ResponseDump);
-            Output.WriteLine("===== RESPONSE END =====");
-
-            if (call.ResponseProcessingError)
-            {
-                Output.WriteLine("");
-                Output.WriteLine($"===== RESPONSE PROC ERROR ({typeof(TApiContact).Name}) =====");
-                Output.WriteLine("");
-                Output.WriteLine(call.ProcessingError.ToString());
-                Output.WriteLine("===== RESPONSE PROC ERROR END =====");
-            }
         }
     }
 }

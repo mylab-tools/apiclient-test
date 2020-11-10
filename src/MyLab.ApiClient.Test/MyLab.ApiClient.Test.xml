@@ -42,6 +42,29 @@
             Override to tune <see cref="T:System.Net.Http.HttpClient"/> for all tests in test class
             </summary>
         </member>
+        <member name="T:MyLab.ApiClient.Test.CallDetailsExtensions">
+            <summary>
+            Provides extension methods for <see cref="T:MyLab.ApiClient.CallDetails`1"/> and <see cref="T:MyLab.ApiClient.Test.TestCallDetails`1"/>
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.CallDetailsExtensions.ToTestDump``2(MyLab.ApiClient.CallDetails{``0})">
+            <summary>
+            Gets web-call dump for test output 
+            </summary>
+            <typeparam name="TRes">call result</typeparam>
+            <typeparam name="TContract">API contract</typeparam>
+            <param name="call">web call</param>
+            <returns>string dump</returns>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.CallDetailsExtensions.ToTestDump``2(MyLab.ApiClient.Test.TestCallDetails{``0})">
+            <summary>
+            Gets web-call dump for test output 
+            </summary>
+            <typeparam name="TRes">call result</typeparam>
+            <typeparam name="TContract">API contract</typeparam>
+            <param name="call">web call</param>
+            <returns>string dump</returns>
+        </member>
         <member name="T:MyLab.ApiClient.Test.TestApi`2">
             <summary>
             Represent test api application instance

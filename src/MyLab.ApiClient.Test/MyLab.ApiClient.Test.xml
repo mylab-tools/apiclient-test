@@ -47,6 +47,15 @@
             Provides extension methods for <see cref="T:MyLab.ApiClient.CallDetails`1"/> and <see cref="T:MyLab.ApiClient.Test.TestCallDetails`1"/>
             </summary>
         </member>
+        <member name="M:MyLab.ApiClient.Test.CallDetailsExtensions.ToTestDump``1(MyLab.ApiClient.CallDetails{``0},System.Type)">
+            <summary>
+            Gets web-call dump for test output 
+            </summary>
+            <typeparam name="TRes">call result</typeparam>
+            <param name="call">web call</param>
+            <param name="contractType">API contract</param>
+            <returns>string dump</returns>
+        </member>
         <member name="M:MyLab.ApiClient.Test.CallDetailsExtensions.ToTestDump``2(MyLab.ApiClient.CallDetails{``0})">
             <summary>
             Gets web-call dump for test output 
@@ -62,6 +71,15 @@
             </summary>
             <typeparam name="TRes">call result</typeparam>
             <typeparam name="TContract">API contract</typeparam>
+            <param name="call">web call</param>
+            <returns>string dump</returns>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.CallDetailsExtensions.ToTestDump``1(MyLab.ApiClient.Test.TestCallDetails{``0},System.Type)">
+            <summary>
+            Gets web-call dump for test output 
+            </summary>
+            <typeparam name="TRes">call result</typeparam>
+            <param name="contractType">API contract</param>
             <param name="call">web call</param>
             <returns>string dump</returns>
         </member>

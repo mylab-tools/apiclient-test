@@ -7,7 +7,7 @@ using MyLab.ApiClient;
 namespace TestServer
 {
     [Api("test")]
-    public interface ITestService
+    public interface ITestApi
     {
         [Get("add-salt")]
         Task<string> AddSalt([JsonContent]string val);

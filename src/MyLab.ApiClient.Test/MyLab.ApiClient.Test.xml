@@ -47,40 +47,12 @@
             Provides extension methods for <see cref="T:MyLab.ApiClient.CallDetails`1"/> and <see cref="T:MyLab.ApiClient.Test.TestCallDetails`1"/>
             </summary>
         </member>
-        <member name="M:MyLab.ApiClient.Test.CallDetailsExtensions.ToTestDump``1(MyLab.ApiClient.CallDetails{``0},System.Type)">
+        <member name="M:MyLab.ApiClient.Test.CallDetailsExtensions.ToTestDump(MyLab.ApiClient.CallDetails,System.Type)">
             <summary>
             Gets web-call dump for test output 
             </summary>
-            <typeparam name="TRes">call result</typeparam>
             <param name="call">web call</param>
             <param name="contractType">API contract</param>
-            <returns>string dump</returns>
-        </member>
-        <member name="M:MyLab.ApiClient.Test.CallDetailsExtensions.ToTestDump``2(MyLab.ApiClient.CallDetails{``0})">
-            <summary>
-            Gets web-call dump for test output 
-            </summary>
-            <typeparam name="TRes">call result</typeparam>
-            <typeparam name="TContract">API contract</typeparam>
-            <param name="call">web call</param>
-            <returns>string dump</returns>
-        </member>
-        <member name="M:MyLab.ApiClient.Test.CallDetailsExtensions.ToTestDump``2(MyLab.ApiClient.Test.TestCallDetails{``0})">
-            <summary>
-            Gets web-call dump for test output 
-            </summary>
-            <typeparam name="TRes">call result</typeparam>
-            <typeparam name="TContract">API contract</typeparam>
-            <param name="call">web call</param>
-            <returns>string dump</returns>
-        </member>
-        <member name="M:MyLab.ApiClient.Test.CallDetailsExtensions.ToTestDump``1(MyLab.ApiClient.Test.TestCallDetails{``0},System.Type)">
-            <summary>
-            Gets web-call dump for test output 
-            </summary>
-            <typeparam name="TRes">call result</typeparam>
-            <param name="contractType">API contract</param>
-            <param name="call">web call</param>
             <returns>string dump</returns>
         </member>
         <member name="T:MyLab.ApiClient.Test.TestApi`2">
@@ -112,13 +84,21 @@
             <summary>
             Starts test API instance and returns <see cref="T:MyLab.ApiClient.ApiClient`1"/>
             </summary>
-            <returns></returns>
         </member>
         <member name="M:MyLab.ApiClient.Test.TestApi`2.Start(System.Net.Http.HttpClient@,System.Action{Microsoft.Extensions.DependencyInjection.IServiceCollection},System.Action{System.Net.Http.HttpClient})">
             <summary>
             Starts test API instance and returns <see cref="T:MyLab.ApiClient.ApiClient`1"/>
             </summary>
-            <returns></returns>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.TestApi`2.StartWithProxy(System.Action{Microsoft.Extensions.DependencyInjection.IServiceCollection},System.Action{System.Net.Http.HttpClient})">
+            <summary>
+            Starts test API instance and returns <see cref="T:MyLab.ApiClient.ApiClient`1"/>
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.TestApi`2.StartWithProxy(System.Net.Http.HttpClient@,System.Action{Microsoft.Extensions.DependencyInjection.IServiceCollection},System.Action{System.Net.Http.HttpClient})">
+            <summary>
+            Starts test API instance and returns <see cref="T:MyLab.ApiClient.ApiClient`1"/>
+            </summary>
         </member>
         <member name="T:MyLab.ApiClient.Test.TestApiClient`1">
             <summary>
@@ -165,6 +145,31 @@
         <member name="M:MyLab.ApiClient.Test.TestCallDetails`1.#ctor(MyLab.ApiClient.CallDetails{`0})">
             <summary>
             Initializes a new instance of <see cref="T:MyLab.ApiClient.Test.TestCallDetails`1"/>
+            </summary>
+        </member>
+        <member name="T:MyLab.ApiClient.Test.TestCallDetails">
+            <summary>
+            Contains details about request and response
+            </summary>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.TestCallDetails.ResponseProcessingError">
+            <summary>
+            Determines that there was processing result error
+            </summary>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.TestCallDetails.ProcessingError">
+            <summary>
+            Gets response processing exception
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.TestCallDetails.#ctor(MyLab.ApiClient.CallDetails)">
+            <summary>
+            Initializes a new instance of <see cref="T:MyLab.ApiClient.Test.TestCallDetails`1"/>
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.TestOutputApiCallObserver.#ctor(Xunit.Abstractions.ITestOutputHelper,System.Type)">
+            <summary>
+            Initializes a new instance of <see cref="T:MyLab.ApiClient.Test.TestOutputApiCallObserver"/>
             </summary>
         </member>
     </members>

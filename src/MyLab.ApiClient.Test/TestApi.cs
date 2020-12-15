@@ -42,7 +42,6 @@ namespace MyLab.ApiClient.Test
         /// <summary>
         /// Starts test API instance and returns <see cref="ApiClient{TApiContract}"/>
         /// </summary>
-        /// <returns></returns>
         public TestApiClient<TApiContact> Start(
             Action<IServiceCollection> serviceOverrider = null, 
             Action<HttpClient> httpClientTuner = null)
@@ -53,7 +52,6 @@ namespace MyLab.ApiClient.Test
         /// <summary>
         /// Starts test API instance and returns <see cref="ApiClient{TApiContract}"/>
         /// </summary>
-        /// <returns></returns>
         public TestApiClient<TApiContact> Start(out HttpClient innerHttpClient,
             Action<IServiceCollection> serviceOverrider = null,
             Action<HttpClient> httpClientTuner = null)
@@ -75,6 +73,37 @@ namespace MyLab.ApiClient.Test
             {
                 Output = Output
             };
+        }
+
+        /// <summary>
+        /// Starts test API instance and returns <see cref="ApiClient{TApiContract}"/>
+        /// </summary>
+        public TApiContact StartWithProxy(
+            Action<IServiceCollection> serviceOverrider = null,
+            Action<HttpClient> httpClientTuner = null)
+        {
+            return StartWithProxy(out _, serviceOverrider, httpClientTuner);
+        }
+
+        /// <summary>
+        /// Starts test API instance and returns <see cref="ApiClient{TApiContract}"/>
+        /// </summary>
+        public TApiContact StartWithProxy(out HttpClient innerHttpClient,
+            Action<IServiceCollection> serviceOverrider = null,
+            Action<HttpClient> httpClientTuner = null)
+        {
+            var factory = _appFactory.WithWebHostBuilder(builder => builder.ConfigureTestServices(srv =>
+            {
+                ServiceOverrider?.Invoke(srv);
+                serviceOverrider?.Invoke(srv);
+            }));
+
+            innerHttpClient = factory.CreateClient();
+
+            HttpClientTuner?.Invoke(innerHttpClient);
+            httpClientTuner?.Invoke(innerHttpClient);
+
+            return ApiProxy<TApiContact>.Create(new SingleHttpClientProvider(innerHttpClient), new TestOutputApiCallObserver(Output, typeof(TApiContact)));
         }
 
         public void Dispose()

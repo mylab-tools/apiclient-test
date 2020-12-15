@@ -45,7 +45,7 @@ namespace MyLab.ApiClient.Test
         /// <summary>
         /// Performs server method calling
         /// </summary>
-        protected Task<TestCallDetails<string>> TestCall(Expression<Func<TApiContact, Task>> invoker, 
+        protected Task<TestCallDetails> TestCall(Expression<Func<TApiContact, Task>> invoker, 
             Action<IServiceCollection> overrideServices = null,
             Action<HttpClient> httpClientPostInit = null)
         {

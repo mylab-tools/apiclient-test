@@ -30,28 +30,28 @@ namespace MyLab.ApiClient.Test
         /// <summary>
         /// Performs server method calling
         /// </summary>
-        public async Task<TestCallDetails<string>> Call(Expression<Func<TApiContact, Task>> invoker)
+        public async Task<TestCallDetails> Call(Expression<Func<TApiContact, Task>> invoker)
         {
-            CallDetails<string> details;
+            CallDetails details;
             Exception respProcError = null;
 
             try
             {
-                details = await _apiClient.Call(invoker).GetDetailed();
+                details = await _apiClient.Request(invoker).GetDetailedAsync();
             }
-            catch (DetailedResponseProcessingException<string> e)
+            catch (DetailedResponseProcessingException<CallDetails> e)
             {
                 respProcError = e.InnerException;
                 details = e.CallDetails;
             }
             
-            var resDetails = new TestCallDetails<string>(details)
+            var resDetails = new TestCallDetails(details)
             {
                 ResponseProcessingError = respProcError != null,
                 ProcessingError =  respProcError
             };
 
-            Output?.WriteLine(resDetails.ToTestDump<string, TApiContact>());
+            Output?.WriteLine(resDetails.ToTestDump(typeof(TApiContact)));
 
             return resDetails;
         }
@@ -66,9 +66,9 @@ namespace MyLab.ApiClient.Test
 
             try
             {
-                details = await _apiClient.Call(invoker).GetDetailed();
+                details = await _apiClient.Request(invoker).GetDetailedAsync();
             }
-            catch (DetailedResponseProcessingException<TRes> e)
+            catch (DetailedResponseProcessingException<CallDetails<TRes>> e)
             {
                 respProcError = e.InnerException;
                 details = e.CallDetails;
@@ -80,7 +80,7 @@ namespace MyLab.ApiClient.Test
                 ProcessingError = respProcError
             };
 
-            Output?.WriteLine(resDetails.ToTestDump<TRes, TApiContact>());
+            Output?.WriteLine(resDetails.ToTestDump(typeof(TApiContact)));
 
             return resDetails;
         }

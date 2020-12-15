@@ -1,8 +1,5 @@
-using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
-using MyLab.ApiClient;
 using MyLab.ApiClient.Test;
 using TestServer;
 using Xunit;

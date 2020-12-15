@@ -35,6 +35,19 @@ namespace FuncTest
         }
 
         [Fact]
+        public async Task ShouldInvokeServerCallWithProxy()
+        {
+            //Arrange 
+            var client = _api.StartWithProxy();
+
+            //Act
+            var val = await client.AddSalt("test");
+
+            //Assert
+            Assert.Equal("test-foo", val);
+        }
+
+        [Fact]
         public async Task ShouldInvokeWithServiceConfiguration()
         {
             //Arrange

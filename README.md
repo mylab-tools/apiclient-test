@@ -129,7 +129,7 @@ Payload here
 
 * `TestCall` - для вызова методов, которые не возвращают результат выполнения;
 
-* `TestCall<TRes>` - для вызова методов, которые возращают результат выполнения.
+* `TestCall<TRes>` - для вызова методов, которые возвращают результат выполнения.
 
 В качестве первого и обязательного параметра указывается выражение,которое должно вызывать метод контракта `API`. Результат выполнение - детализация вызова `CallDetails<TRes>` (`CallDetails<string>` - для метода, не возвращающего результат).
 
@@ -276,7 +276,7 @@ protected virtual void HttpClientPostInit(HttpClient client)
 * создавать по одному объекту `TestApi` на каждый `API`;
 * при инициализации в конструкторе присваивать `ITestOutputHelper`;
 * при необходимости, во время инициализации в конструкторе, указывать общие для всех тестов класса переопределения сервисов и настройки `HttpClient` через определение полей  `ServiceOverrider` и `HttpClientTuner`;
-* в каждом тестовом методе запускать приложения `API` и получать по клиенту на действующие в этом тесте экземпляры `API` с помощью метода `Start` класса `TestApi`.
+* в каждом тестовом методе запускать приложения `API` и получать по клиенту на действующие в этом тесте экземпляры `API` с помощью метода `Start` или `StartWithProxy`класса `TestApi`.
 
 ### Инициализация
 
@@ -293,6 +293,8 @@ public TestApiBehavior(ITestOutputHelper output)
 ```
 
 ### Использование
+
+Пример использования объекта клиента API:
 
 ```C#
 [Fact]
@@ -320,6 +322,50 @@ var client = _api.Start(
     	//serviceOverrider: services => {},
 	    //httpClientTuner: client => {}
     );
+```
+
+Пример использования прозрачного прокси:
+
+```C#
+[Fact]
+public async Task ShouldInvokeServerCallWithProxy()
+{
+    //Arrange 
+    var client = _api.StartWithProxy();
+
+    //Act
+    var val = await client.AddSalt("test");
+
+    //Assert
+    Assert.Equal("test-foo", val);
+}
+```
+
+При использовании класса `TestApi`, как и при использовании `ApiClientTest `, в вывод теста отправляются дампы запросов и ответов. Для этого необходимо полю объекта `TestApi.Output` (рекомендуется делать это в конструкторе класса теста) присвоить объекта тестового вывода `ITestOutputHelper`. Пример вывода дампов для двух примеров выше (эквивалентно для обоих примеров):
+
+```
+===== REQUEST BEGIN (ITestApi) =====
+
+GET http://localhost/test/add-salt
+
+Cookie: <empty>
+Content-Type: application/json
+Content-Length: 6
+
+"test"
+
+===== REQUEST END =====
+
+===== RESPONSE BEGIN (ITestApi) =====
+
+200 OK
+
+Content-Type: text/plain; charset=utf-8
+
+test-foo
+
+===== RESPONSE END =====
+
 ```
 
 

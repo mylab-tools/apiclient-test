@@ -62,7 +62,12 @@ namespace MyLab.ApiClient.Test
                 serviceOverrider?.Invoke(srv);
             }));
 
-            innerHttpClient = factory.CreateClient();
+            var opt = new WebApplicationFactoryClientOptions
+            {
+                AllowAutoRedirect = false
+            };
+
+            innerHttpClient = factory.CreateClient(opt);
 
             HttpClientTuner?.Invoke(innerHttpClient);
             httpClientTuner?.Invoke(innerHttpClient);
@@ -98,7 +103,12 @@ namespace MyLab.ApiClient.Test
                 serviceOverrider?.Invoke(srv);
             }));
 
-            innerHttpClient = factory.CreateClient();
+            var opt = new WebApplicationFactoryClientOptions
+            {
+                AllowAutoRedirect = false
+            };
+
+            innerHttpClient = factory.CreateClient(opt);
 
             HttpClientTuner?.Invoke(innerHttpClient);
             httpClientTuner?.Invoke(innerHttpClient);

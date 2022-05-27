@@ -113,7 +113,10 @@ namespace MyLab.ApiClient.Test
             HttpClientTuner?.Invoke(innerHttpClient);
             httpClientTuner?.Invoke(innerHttpClient);
 
-            return ApiProxy<TApiContact>.Create(new SingleHttpClientProvider(innerHttpClient), new TestOutputApiCallObserver(Output, typeof(TApiContact)));
+            return ApiProxy<TApiContact>.Create(
+                new SingleHttpClientProvider(innerHttpClient), 
+                null,
+                new TestOutputApiCallObserver(Output, typeof(TApiContact)));
         }
 
         public void Dispose()

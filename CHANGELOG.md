@@ -4,6 +4,12 @@
 
 Формат лога изменений базируется на [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.5.6] - 2022-11-29
+
+### Добавлено
+
+* отдельная сборка под `NET6+`, где используется более актуальная сборка  `Microsoft.AspNetCore.Mvc.Testing`, чтобы поддержать тестирование веб-приложений в `NET6+`. [issue](https://stackoverflow.com/questions/61159115/asp-net-core-testing-no-method-public-static-ihostbuilder-createhostbuilders).
+
 ## [1.4.6] - 2022-05-27
 
 ### Изменено

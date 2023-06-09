@@ -100,6 +100,43 @@
             Starts test API instance and returns <see cref="T:MyLab.ApiClient.ApiClient`1"/>
             </summary>
         </member>
+        <member name="T:MyLab.ApiClient.Test.TestApiAsset">
+            <summary>
+            Contains tools to operate with test API
+            </summary>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.TestApiAsset.ServiceProvider">
+            <summary>
+            Application service provider
+            </summary>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.TestApiAsset.HttpClient">
+            <summary>
+            An <see cref="P:MyLab.ApiClient.Test.TestApiAsset.HttpClient"/> which will be used for interaction with API
+            </summary>
+        </member>
+        <member name="T:MyLab.ApiClient.Test.ClientTestApiAsset`1">
+            <summary>
+            Contains tst API tools and <see cref="T:MyLab.ApiClient.Test.TestApiClient`1"/> intended for interaction with API
+            </summary>
+            <typeparam name="TContract">API contract</typeparam>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.ClientTestApiAsset`1.ApiClient">
+            <summary>
+            A client intended for interaction with API
+            </summary>
+        </member>
+        <member name="T:MyLab.ApiClient.Test.ProxyTestApiAsset`1">
+            <summary>
+            Contains tst API tools and proxy intended for interaction with API
+            </summary>
+            <typeparam name="TContract">API contract</typeparam>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.ProxyTestApiAsset`1.ApiClient">
+            <summary>
+            A client intended for interaction with API
+            </summary>
+        </member>
         <member name="T:MyLab.ApiClient.Test.TestApiClient`1">
             <summary>
             Provides wrapped test API calls 
@@ -173,43 +210,6 @@
         </member>
         <member name="M:MyLab.ApiClient.Test.TestApiFixture`2.Dispose">
             <inheritdoc />
-        </member>
-        <member name="T:MyLab.ApiClient.Test.TestApiSet">
-            <summary>
-            Contains tools to operate with test API
-            </summary>
-        </member>
-        <member name="P:MyLab.ApiClient.Test.TestApiSet.ServiceProvider">
-            <summary>
-            Application service provider
-            </summary>
-        </member>
-        <member name="P:MyLab.ApiClient.Test.TestApiSet.HttpClient">
-            <summary>
-            An <see cref="P:MyLab.ApiClient.Test.TestApiSet.HttpClient"/> which will be used for interaction with API
-            </summary>
-        </member>
-        <member name="T:MyLab.ApiClient.Test.ClientTestApiSet`1">
-            <summary>
-            Contains tst API tools and <see cref="T:MyLab.ApiClient.Test.TestApiClient`1"/> intended for interaction with API
-            </summary>
-            <typeparam name="TContract">API contract</typeparam>
-        </member>
-        <member name="P:MyLab.ApiClient.Test.ClientTestApiSet`1.ApiClient">
-            <summary>
-            A client intended for interaction with API
-            </summary>
-        </member>
-        <member name="T:MyLab.ApiClient.Test.ProxyTestApiSet`1">
-            <summary>
-            Contains tst API tools and proxy intended for interaction with API
-            </summary>
-            <typeparam name="TContract">API contract</typeparam>
-        </member>
-        <member name="P:MyLab.ApiClient.Test.ProxyTestApiSet`1.ApiClient">
-            <summary>
-            A client intended for interaction with API
-            </summary>
         </member>
         <member name="T:MyLab.ApiClient.Test.TestCallDetails`1">
             <summary>

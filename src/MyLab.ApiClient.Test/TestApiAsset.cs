@@ -6,7 +6,7 @@ namespace MyLab.ApiClient.Test
     /// <summary>
     /// Contains tools to operate with test API
     /// </summary>
-    public class TestApiSet
+    public class TestApiAsset
     {
         /// <summary>
         /// Application service provider
@@ -22,7 +22,7 @@ namespace MyLab.ApiClient.Test
     /// Contains tst API tools and <see cref="TestApiClient{TApiContact}"/> intended for interaction with API
     /// </summary>
     /// <typeparam name="TContract">API contract</typeparam>
-    public class ClientTestApiSet<TContract> : TestApiSet
+    public class ClientTestApiAsset<TContract> : TestApiAsset
         where TContract : class
     {
         /// <summary>
@@ -35,7 +35,7 @@ namespace MyLab.ApiClient.Test
     /// Contains tst API tools and proxy intended for interaction with API
     /// </summary>
     /// <typeparam name="TContract">API contract</typeparam>
-    public class ProxyTestApiSet<TContract> : TestApiSet
+    public class ProxyTestApiAsset<TContract> : TestApiAsset
         where TContract : class
     {
         /// <summary>

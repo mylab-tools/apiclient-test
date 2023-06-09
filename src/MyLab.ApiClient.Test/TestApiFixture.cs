@@ -42,7 +42,7 @@ namespace MyLab.ApiClient.Test
         /// <summary>
         /// Starts test API instance and returns <see cref="ApiClient{TApiContract}"/>
         /// </summary>
-        public ClientTestApiSet<TApiContact> Start(
+        public ClientTestApiAsset<TApiContact> Start(
             Action<IServiceCollection> serviceOverrider = null, 
             Action<HttpClient> httpClientTuner = null)
         {
@@ -52,7 +52,7 @@ namespace MyLab.ApiClient.Test
         /// <summary>
         /// Starts test API instance and returns <see cref="ApiClient{TApiContract}"/>
         /// </summary>
-        public ClientTestApiSet<TApiContact> Start(out HttpClient innerHttpClient,
+        public ClientTestApiAsset<TApiContact> Start(out HttpClient innerHttpClient,
             Action<IServiceCollection> serviceOverrider = null,
             Action<HttpClient> httpClientTuner = null)
         {
@@ -74,7 +74,7 @@ namespace MyLab.ApiClient.Test
 
             var client = new ApiClient<TApiContact>(new SingleHttpClientProvider(innerHttpClient));
 
-            return new ClientTestApiSet<TApiContact>
+            return new ClientTestApiAsset<TApiContact>
             {
                 HttpClient = innerHttpClient,
                 ApiClient = new TestApiClient<TApiContact>(client)
@@ -88,7 +88,7 @@ namespace MyLab.ApiClient.Test
         /// <summary>
         /// Starts test API instance and returns <see cref="ApiClient{TApiContract}"/>
         /// </summary>
-        public ProxyTestApiSet<TApiContact> StartWithProxy(
+        public ProxyTestApiAsset<TApiContact> StartWithProxy(
             Action<IServiceCollection> serviceOverrider = null,
             Action<HttpClient> httpClientTuner = null)
         {
@@ -98,7 +98,7 @@ namespace MyLab.ApiClient.Test
         /// <summary>
         /// Starts test API instance and returns <see cref="ApiClient{TApiContract}"/>
         /// </summary>
-        public ProxyTestApiSet<TApiContact> StartWithProxy(out HttpClient innerHttpClient,
+        public ProxyTestApiAsset<TApiContact> StartWithProxy(out HttpClient innerHttpClient,
             Action<IServiceCollection> serviceOverrider = null,
             Action<HttpClient> httpClientTuner = null)
         {
@@ -123,7 +123,7 @@ namespace MyLab.ApiClient.Test
                 null,
                 new TestOutputApiCallObserver(Output, typeof(TApiContact)));
 
-            return new ProxyTestApiSet<TApiContact>
+            return new ProxyTestApiAsset<TApiContact>
             {
                 ApiClient = proxy,
                 HttpClient = innerHttpClient,

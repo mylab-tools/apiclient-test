@@ -10,6 +10,7 @@ namespace MyLab.ApiClient.Test
     /// <summary>
     /// Contains base functional for test with API client
     /// </summary>
+    [Obsolete("Use TestApiFixture<> instead")] 
     public class ApiClientTest<TStartup, TApiContact> : IDisposable
         where TStartup : class
         where TApiContact : class

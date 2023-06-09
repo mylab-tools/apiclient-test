@@ -126,6 +126,91 @@
             Performs server method calling
             </summary>
         </member>
+        <member name="T:MyLab.ApiClient.Test.TestApiFixture`2">
+            <summary>
+            Provides tools to create test API application
+            </summary>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.TestApiFixture`2.ServiceOverrider">
+            <summary>
+            Overrides services
+            </summary>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.TestApiFixture`2.HttpClientTuner">
+            <summary>
+            Additional tunes <see cref="T:System.Net.Http.HttpClient"/>
+            </summary>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.TestApiFixture`2.Output">
+            <summary>
+            Test output for log writing
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.TestApiFixture`2.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:MyLab.ApiClient.Test.TestApiFixture`2"/>
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.TestApiFixture`2.Start(System.Action{Microsoft.Extensions.DependencyInjection.IServiceCollection},System.Action{System.Net.Http.HttpClient})">
+            <summary>
+            Starts test API instance and returns <see cref="T:MyLab.ApiClient.ApiClient`1"/>
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.TestApiFixture`2.Start(System.Net.Http.HttpClient@,System.Action{Microsoft.Extensions.DependencyInjection.IServiceCollection},System.Action{System.Net.Http.HttpClient})">
+            <summary>
+            Starts test API instance and returns <see cref="T:MyLab.ApiClient.ApiClient`1"/>
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.TestApiFixture`2.StartWithProxy(System.Action{Microsoft.Extensions.DependencyInjection.IServiceCollection},System.Action{System.Net.Http.HttpClient})">
+            <summary>
+            Starts test API instance and returns <see cref="T:MyLab.ApiClient.ApiClient`1"/>
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.TestApiFixture`2.StartWithProxy(System.Net.Http.HttpClient@,System.Action{Microsoft.Extensions.DependencyInjection.IServiceCollection},System.Action{System.Net.Http.HttpClient})">
+            <summary>
+            Starts test API instance and returns <see cref="T:MyLab.ApiClient.ApiClient`1"/>
+            </summary>
+        </member>
+        <member name="M:MyLab.ApiClient.Test.TestApiFixture`2.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:MyLab.ApiClient.Test.TestApiSet">
+            <summary>
+            Contains tools to operate with test API
+            </summary>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.TestApiSet.ServiceProvider">
+            <summary>
+            Application service provider
+            </summary>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.TestApiSet.HttpClient">
+            <summary>
+            An <see cref="P:MyLab.ApiClient.Test.TestApiSet.HttpClient"/> which will be used for interaction with API
+            </summary>
+        </member>
+        <member name="T:MyLab.ApiClient.Test.ClientTestApiSet`1">
+            <summary>
+            Contains tst API tools and <see cref="T:MyLab.ApiClient.Test.TestApiClient`1"/> intended for interaction with API
+            </summary>
+            <typeparam name="TContract">API contract</typeparam>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.ClientTestApiSet`1.ApiClient">
+            <summary>
+            A client intended for interaction with API
+            </summary>
+        </member>
+        <member name="T:MyLab.ApiClient.Test.ProxyTestApiSet`1">
+            <summary>
+            Contains tst API tools and proxy intended for interaction with API
+            </summary>
+            <typeparam name="TContract">API contract</typeparam>
+        </member>
+        <member name="P:MyLab.ApiClient.Test.ProxyTestApiSet`1.ApiClient">
+            <summary>
+            A client intended for interaction with API
+            </summary>
+        </member>
         <member name="T:MyLab.ApiClient.Test.TestCallDetails`1">
             <summary>
             Contains details about request and response

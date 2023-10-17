@@ -29,16 +29,21 @@ namespace MyLab.ApiClient.Test
         {
             var contractName = GetContractName(contractType);
 
-            sb.AppendLine("");
-            sb.AppendLine($"===== REQUEST BEGIN ({contractName}) =====");
-            sb.AppendLine("");
-            sb.AppendLine(call.RequestDump);
-            sb.AppendLine("===== REQUEST END =====");
-            sb.AppendLine("");
-            sb.AppendLine($"===== RESPONSE BEGIN ({contractName}) =====");
-            sb.AppendLine("");
-            sb.AppendLine(call.ResponseDump);
-            sb.AppendLine("===== RESPONSE END =====");
+            Append(sb, "");
+            Append(sb, $"===== REQUEST BEGIN ({contractName}) =====");
+            Append(sb, "");
+            Append(sb, call.RequestDump);
+            Append(sb, "===== REQUEST END =====");
+            Append(sb, "");
+            Append(sb, $"===== RESPONSE BEGIN ({contractName}) =====");
+            Append(sb, "");
+            Append(sb, call.ResponseDump);
+            Append(sb, "===== RESPONSE END =====");
+        }
+
+        static void Append(StringBuilder sb, string str)
+        {
+            sb.Append(str + "\r\n");
         }
 
         static string GetContractName(Type contractType) => contractType != null
